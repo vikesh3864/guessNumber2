@@ -1,5 +1,4 @@
 
-
 let randomNumber = parseInt(Math.random() * 100 + 1);
 
 const submit = document.querySelector('#subt');
@@ -30,6 +29,7 @@ function validateGuess(guess) {
     alert('PLease enter a valid number');
   } else if (guess < 1) {
     alert('PLease enter a number more than 1');
+    
   } else if (guess > 100) {
     alert('PLease enter a  number less than 100');
   } else {
@@ -52,12 +52,12 @@ function checkGuess(guess) {
   } else if (guess < randomNumber) {
     displayMessage(`Number is TOO low`);
     if(randomNumber-guess<=5){
-      displayMessage(`you are so near`);
+    displayMessage(`you are so near`)
     }
   } else if (guess > randomNumber) {
     displayMessage(`Number is TOO High`);
     if(guess-randomNumber<=5){
-      displayMessage(`you are so near`);
+      displayMessage(`you are so near`)
     }
   }
 }
@@ -90,7 +90,6 @@ function endGame() {
   startOver.appendChild(newGameButton);
 }
 
-
 function startNewGame() {
   randomNumber = parseInt(Math.random() * 100 + 1);
   prevGuess = [];
@@ -105,3 +104,6 @@ function startNewGame() {
 
   playGame = true;
 }
+
+
+
