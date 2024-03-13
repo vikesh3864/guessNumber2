@@ -51,8 +51,14 @@ function checkGuess(guess) {
     endGame();
   } else if (guess < randomNumber) {
     displayMessage(`Number is TOO low`);
+    if(randomNumber-guess<=5){
+      displayMessage(`you are so near`);
+    }
   } else if (guess > randomNumber) {
     displayMessage(`Number is TOO High`);
+    if(guess-randomNumber<=5){
+      displayMessage(`you are so near`);
+    }
   }
 }
 
@@ -74,21 +80,28 @@ function endGame() {
   p.innerHTML = `<h2 id="newGame">Start new Game</h2>`;
   startOver.appendChild(p);
   playGame = false;
-  newGame();
-}
 
-function newGame() {
-  const newGameButton = document.querySelector('#newGame');
-  newGameButton.addEventListener('click', function (e) {
-    randomNumber = parseInt(Math.random() * 100 + 1);
-    prevGuess = [];
-    numGuess = 1;
-    guessSlot.innerHTML = '';
-    remaining.innerHTML = `${11 - numGuess} `;
-    userInput.removeAttribute('disabled');
-    startOver.removeChild(p);
-
-    playGame = true;
+  // Add a "Start New Game" button after the game ends
+  const newGameButton = document.createElement('button');
+  newGameButton.textContent = 'Start New Game';
+  newGameButton.addEventListener('click', function () {
+    startNewGame();
   });
+  startOver.appendChild(newGameButton);
 }
 
+
+function startNewGame() {
+  randomNumber = parseInt(Math.random() * 100 + 1);
+  prevGuess = [];
+  numGuess = 1;
+  guessSlot.innerHTML = '';
+  remaining.innerHTML = `${11 - numGuess} `;
+  userInput.removeAttribute('disabled');
+  
+  // Remove the paragraph element and the button
+  startOver.removeChild(p);
+  startOver.removeChild(startOver.lastChild);
+
+  playGame = true;
+}
